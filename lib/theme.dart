@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Color whiteColor = Color(0XFFFFFFFF);
+Color whiteColor = const Color(0XFFFFFFFF);
 
 TextStyle titleTextStyle = GoogleFonts.poppins(
   color: whiteColor,
@@ -9,8 +9,14 @@ TextStyle titleTextStyle = GoogleFonts.poppins(
   fontSize: 26
 );
 
+TextStyle titleProTextStyle = GoogleFonts.poppins(
+  color: Color(0xFF007DFF),
+  fontWeight: FontWeight.bold,
+  fontSize: 26
+);
+
 TextStyle subtitleTextStyle = GoogleFonts.poppins(
-  color: Color(0xFF8997B8),
+  color:const Color(0xFF8997B8),
   fontWeight: FontWeight.w300,
   fontSize: 16
 );
