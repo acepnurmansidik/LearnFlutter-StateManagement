@@ -15,7 +15,7 @@ class _PaymentAppState extends State<PaymentApp> {
   int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
-    Widget options(int index) {
+    Widget options(int index, int price, String title, String subTitle) {
       return GestureDetector(
         onTap: (() {
           setState(() {
@@ -23,14 +23,32 @@ class _PaymentAppState extends State<PaymentApp> {
           });
         }),
         child: Container(
-          margin: EdgeInsets.all(20),
+          margin: EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20),
           padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
               border: Border.all(
                   color: selectedIndex == index
                       ? Color(0xFF007DFF)
                       : Color(0xFF4D5B7C)),
-              borderRadius: BorderRadius.all(Radius.circular(14))),
+              borderRadius: BorderRadius.all(Radius.circular(14))
+          ),
+          child: Row(
+            children: [
+              Text('O', style: selectedIndex == index ? titleProTextStyle : titleTextStyle,),
+              SizedBox(
+                width: 16,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(title, style: planTextStyle,),
+                  Text(subTitle, style: descTextStyle,)
+                ],
+              ),
+              Spacer(),
+              Text("€$price", style: priceTextStyle,),
+            ],
+          )
         ),
       );
     }
@@ -41,7 +59,12 @@ class _PaymentAppState extends State<PaymentApp> {
           backgroundColor: Color(0xFF04112F),
           body: SafeArea(
             child: ListView(
-              children: [HeaderWidget(), options(0), options(1), options(2)],
+              children: [
+                HeaderWidget(),
+                options(0,20,'Montly', 'Good for starting up'),
+                options(1,30,'Quartely', 'Focusing on building'),
+                options(2,50,'Yearly', 'Steady company')
+              ],
             ),
           )),
     );
