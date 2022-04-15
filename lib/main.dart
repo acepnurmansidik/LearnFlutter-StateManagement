@@ -15,6 +15,27 @@ class _PaymentAppState extends State<PaymentApp> {
   int selectedIndex = -1;
   @override
   Widget build(BuildContext context) {
+    Widget checkoutButton() {
+      return Column(
+        children: [
+          Container(
+            height: 51.23,
+            width: 311,
+            child: TextButton(
+              onPressed: (){}, 
+              child: Text('Checkout Now', style: btnTextStyle,),
+              style: TextButton.styleFrom(
+                backgroundColor: Color(0xFF007DFF),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(71)
+                )
+              ),
+            ),
+          )
+        ],
+      );
+    }
+
     Widget options(int index, int price, String title, String subTitle) {
       return GestureDetector(
         onTap: (() {
@@ -23,33 +44,45 @@ class _PaymentAppState extends State<PaymentApp> {
           });
         }),
         child: Container(
-          margin: EdgeInsets.only(top: 10, bottom: 10, left: 20,right: 20),
-          padding: EdgeInsets.all(20),
-          decoration: BoxDecoration(
-              border: Border.all(
-                  color: selectedIndex == index
-                      ? Color(0xFF007DFF)
-                      : Color(0xFF4D5B7C)),
-              borderRadius: BorderRadius.all(Radius.circular(14))
-          ),
-          child: Row(
-            children: [
-              Text('O', style: selectedIndex == index ? titleProTextStyle : titleTextStyle,),
-              SizedBox(
-                width: 16,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title, style: planTextStyle,),
-                  Text(subTitle, style: descTextStyle,)
-                ],
-              ),
-              Spacer(),
-              Text("€$price", style: priceTextStyle,),
-            ],
-          )
-        ),
+            margin: EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20),
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(
+                border: Border.all(
+                    color: selectedIndex == index
+                        ? Color(0xFF007DFF)
+                        : Color(0xFF4D5B7C)),
+                borderRadius: BorderRadius.all(Radius.circular(14))),
+            child: Row(
+              children: [
+                Text(
+                  'O',
+                  style: selectedIndex == index
+                      ? titleProTextStyle
+                      : titleTextStyle,
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: planTextStyle,
+                    ),
+                    Text(
+                      subTitle,
+                      style: descTextStyle,
+                    )
+                  ],
+                ),
+                Spacer(),
+                Text(
+                  "€$price",
+                  style: priceTextStyle,
+                ),
+              ],
+            )),
       );
     }
 
@@ -61,9 +94,15 @@ class _PaymentAppState extends State<PaymentApp> {
             child: ListView(
               children: [
                 HeaderWidget(),
-                options(0,20,'Montly', 'Good for starting up'),
-                options(1,30,'Quartely', 'Focusing on building'),
-                options(2,50,'Yearly', 'Steady company')
+                SizedBox(height: 50,),
+                options(0, 20, 'Montly', 'Good for starting up'),
+                options(1, 30, 'Quartely', 'Focusing on building'),
+                options(2, 50, 'Yearly', 'Steady company'),
+                SizedBox(
+                  height: 50,
+                ),
+                selectedIndex > -1 ? checkoutButton() : SizedBox(),
+                SizedBox(height: 25,)
               ],
             ),
           )),
